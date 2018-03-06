@@ -346,6 +346,7 @@ body,html {
 
 .container {
     position: absolute;
+    height: 600px;
     left: 180px;
     top: 60px;
     right: 0;
