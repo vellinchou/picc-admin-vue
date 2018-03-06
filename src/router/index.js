@@ -71,6 +71,18 @@ export const constantRouterMap = [
       }
     ]
   },
+  {
+    path: '/video',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'video',
+        component: () => import('@/views/video/index'),
+        meta: { title: 'video', icon: 'tab' }
+      }
+    ]
+  },
 
   { path: '*', redirect: '/404', hidden: true }
 ]

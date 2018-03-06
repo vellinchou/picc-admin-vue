@@ -1,0 +1,4 @@
+"Version", "1.2.1.5"
+"CompanyName", "腾讯"
+"ProductDescription", "腾讯云音视频LiteAV WebSDK"
+"LegalCopyright", "<腾讯>。  保留所有权利。"
