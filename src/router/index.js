@@ -83,6 +83,18 @@ export const constantRouterMap = [
       }
     ]
   },
+  {
+    path: '/workspace',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'workspace',
+        component: () => import('@/views/workspace/index'),
+        meta: { title: '工作台', icon: 'tab' }
+      }
+    ]
+  },
 
   { path: '*', redirect: '/404', hidden: true }
 ]
