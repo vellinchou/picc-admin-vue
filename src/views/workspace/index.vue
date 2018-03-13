@@ -26,50 +26,45 @@
     <div class="mid inline">
     	
     	<div class="room">
-	      <div class="create-room">
-	        <input size="15" id="RoomNameInput" value="">
+	      <div class="create-room inline">
 	    		<button class="creater"  style="cursor: pointer" @click="createRoom()">
 	    			开始工作
 	    		</button>
 	      </div>
-	    	<div class="">
-			    <div class="now-room inline">
-			      <div class="rnum-div">所在房间:<span id="CurrentRoomName"></span></div>
-			    </div>
-			    <!-- 行內樣式演示用，實際開發請刪除 -->
-			    <div class="room-button inline">
-			      <i class="fluid-layout current"></i>
-			      <i class="fixed-layout"></i>
-			      <!-- 依照不同狀態自行使用 -->
-			      <button id="QuitRoomBtn" type="button" class="calling-btn decline creater float-right" @click='exitRTCRoom()'>退出房间</button>
-			      <button type="button" id="btn-mute" class="calling-btn creater float-right" @click='shutvoice()'>静音
-			      </button>
-		        <!--<button type="button" id="btn-beauty" class="calling-btn creater float-right" onclick='
-		                  var btnBeauty = document.getElementById("btn-beauty") ;
-		                  if (btnBeauty.innerText == "开启美颜") {
-		                      btnBeauty.innerText = "关闭美颜";
-		                      RTCRoom.setBeauty(0, 6, 3);
-		                  }
-		                  else {
-		                      btnBeauty.innerText = "开启美颜";
-		                      RTCRoom.setBeauty(0, 0, 0);
-		                  }
-		                  '>开启美颜
-		        </button>-->
-			    </div>
-			  </div>
+		    <div class="now-room inline">
+		      <div class="rnum-div">所在房间:<span id="CurrentRoomName"></span></div>
+		    </div>
+		    <!-- 行內樣式演示用，實際開發請刪除 -->
+		    <div class="room-button inline">
+		      <i class="fluid-layout current"></i>
+		      <i class="fixed-layout"></i>
+		      <!-- 依照不同狀態自行使用 -->
+		      <button id="QuitRoomBtn" type="button" style="display: none;"
+		      	 class="calling-btn decline creater float-right" @click='exitRTCRoom()'>解散房间</button>
+		      <button id="btn-mute" type="button" class="calling-btn creater float-right" @click='shutvoice()'>静音</button>
+		      <button id="hideself" type="button" class="calling-btn creater float-right" @click='hideself()' style="display: none;">隐藏自己</button>
+	        <!--<button type="button" id="btn-beauty" class="calling-btn creater float-right" onclick='
+	                  var btnBeauty = document.getElementById("btn-beauty") ;
+	                  if (btnBeauty.innerText == "开启美颜") {
+	                      btnBeauty.innerText = "关闭美颜";
+	                      RTCRoom.setBeauty(0, 6, 3);
+	                  }
+	                  else {
+	                      btnBeauty.innerText = "开启美颜";
+	                      RTCRoom.setBeauty(0, 0, 0);
+	                  }
+	                  '>开启美颜
+	        </button>-->
+		    </div>
     	</div>
-    	
-      <div class="video-panel">
-        <div id="PusherAreaID" style="background:tomato;  width:50%; height:50%;z-index:99999;">
+      <div class="video-panel" id="videopanel" style="display: none;">
+        <div id="PusherAreaID" style="background:white; width:30%; height:30%;z-index:9999;position: relative;">
         </div>
-        <div id="PlayerAreaID" style="background:yellow; 
-                border:10px solid red; 
-                position:absolute; 
-                left:0px; top:0px; width:100%; height:100%;z-index:1000;">
+        <div id="PlayerAreaID" style="background-image:url(http://119.27.167.62/wp-content/uploads/2018/03/service.jpg);
+        	background-size: 100% 100%; top:0px; position:absolute; width:100%; height:100%;z-index:1000;">
         </div>
       </div>
-<!--    	<img id="service" src="../../images/service.jpg"/>-->
+    	<img id="service" src="../../images/service.jpg"/>
     </div>
     <div class="right-panel inline">
     	<div class="worksheet">
@@ -179,7 +174,6 @@ import RTCRoom from "./RTCRoomJs/RTCRoom.js";
       };
     },
 	  mounted() {
-//	  	console.log('111111');
 	    this.onDoubleRoomPageLoad();
 	  },
     methods: {
@@ -308,6 +302,71 @@ import RTCRoom from "./RTCRoomJs/RTCRoom.js";
 	        _this.refreshRoomList(interval);
 	      }, interval);
 	    },
+	    doAddRoomIdToList(object) {
+	      var newli = document.createElement("li");
+	      newli.setAttribute("id", object.roomID.toString());
+	      newli.setAttribute("roomName", object.roomName);
+	      newli.setAttribute("peopleNum", object.pushers.length.toString());
+	
+	      var infoDiv = document.createElement("div");
+	      infoDiv.setAttribute("class", "item-info");
+	
+	      var p1 = document.createElement("p");
+	      p1.setAttribute("class", "room-id");
+	      var span1 = document.createElement("span");
+	      span1.setAttribute("class", "label-txt");
+	      span1.innerText = "房间名：";
+	      var span2 = document.createElement("span");
+	      span2.setAttribute("class", "value-txt");
+	      span2.innerText = object.roomName;
+	      p1.appendChild(span1);
+	      p1.appendChild(span2);
+	      infoDiv.appendChild(p1);
+	      newli.appendChild(infoDiv);
+	
+	      var statusDiv = document.createElement("div");
+	      statusDiv.setAttribute("class", "item-status connected");
+	      statusDiv.innerText = "人数:" + object.pushers.length.toString();
+	
+	      newli.appendChild(statusDiv);
+	
+	      newli.onclick = function(ev) {
+	        if (this.inRoom) {
+	          alert("请先退出原来的房间");
+	          return;
+	        }
+	
+	        var cameras = RTCRoom.getCameras();
+	        if (cameras.camera_cnt <= 0) {
+	          alert("进入房间失败，没有可用的摄像头");
+	          return;
+	        }
+	        var peopleNum = document
+	          .getElementById(ev.currentTarget.id)
+	          .getAttribute("peopleNum");
+	        if (parseInt(peopleNum) > 1) {
+	          alert("进入房间失败，房间人数已满");
+	          return;
+	        }
+	
+	        this.inRoom = true;
+	        var roomName = document
+	          .getElementById(ev.currentTarget.id)
+	          .getAttribute("roomName");
+	        var RoomNameDiv = document.getElementById("CurrentRoomName");
+	        RoomNameDiv.innerText = roomName;
+	        RTCRoom.enterRoom({
+	          data: {
+	            roomID: ev.currentTarget.id
+	          },
+	          success: function() {},
+	          fail: function(ret) {
+	            console.log(ret);
+	          }
+	        });
+	      };
+	      document.getElementById("roomlist").appendChild(newli);
+	    },
 	    createRoom() {
 	      if (this.inRoom) {
 	        alert("请先退出原来的房间");
@@ -322,10 +381,13 @@ import RTCRoom from "./RTCRoomJs/RTCRoom.js";
 	        alert("房间名太长，不超过15个字符");
 	        return;
 	      }
-	
+      	
 	      this.inRoom = true;
 	      var RoomNameDiv = document.getElementById("CurrentRoomName");
-//	      RoomNameDiv.innerText = roomName;
+	      RoomNameDiv.innerText = roomName;
+	      
+	    	alert("您已开始工作,请记得带上微笑！");
+	      
 	      RTCRoom.createRoom({
 	        data: {
 	          roomName: Date.parse(new Date()),
@@ -337,6 +399,20 @@ import RTCRoom from "./RTCRoomJs/RTCRoom.js";
 	          }
 	        }
 	      });
+
+      	var hideself = document.getElementById("hideself");
+      	hideself.style.display = 'block';
+      	var videopanel = document.getElementById("videopanel");
+      	videopanel.style.display = 'block';
+      	var pusherAreaID = document.getElementById("PusherAreaID");
+      	pusherAreaID.style.display = 'block';
+      	var playerAreaID = document.getElementById("PlayerAreaID");
+      	playerAreaID.style.display = 'block';;
+      	var quitRoomBtn = document.getElementById("QuitRoomBtn");
+      	quitRoomBtn.style.display = 'block';
+      	var service = document.getElementById("service");
+      	service.style.display = 'none';
+	      
 	    },
 	    shutvoice(){
         var btnMute = document.getElementById("btn-mute");
@@ -349,23 +425,58 @@ import RTCRoom from "./RTCRoomJs/RTCRoom.js";
             btnMute.innerText = "静音";
         }
 	    },
+	    hideself(){
+        var hideself = document.getElementById("hideself");
+        if (hideself.innerText == "隐藏自己") {
+	        hideself.innerText = "显示自己";
+	    		var pusherarea = document.getElementById("PusherAreaID");
+          pusherarea.style.position='absolute';
+          pusherarea.style.zIndex='1000';
+	    		var playerarea = document.getElementById("PlayerAreaID");
+          playerarea.style.position='relative';
+          playerarea.style.zIndex='9999';
+        }
+        else {
+          hideself.innerText = "隐藏自己";
+	    		var pusherarea = document.getElementById("PusherAreaID");
+          pusherarea.style.position='relative';
+          pusherarea.style.zIndex='9999';
+	    		var playerarea = document.getElementById("PlayerAreaID");
+          playerarea.style.position='absolute';
+          playerarea.style.zIndex='1000';
+        }
+	    },
 	    exitRTCRoom() {
-	      var textView = document.getElementById("chat-list");
+//	      var textView = document.getElementById("chat-list");
 //	      textView.innerHTML = "";
 	      console.log("开始退出房间");
 	      RTCRoom.exitRoom();
 	      this.inRoom = false;
+	      alert("工作结束，祝您生活愉快！");
 	
 	      var RoomNameDiv = document.getElementById("CurrentRoomName");
-//	      RoomNameDiv.innerHTML = "";
+	      RoomNameDiv.innerHTML = "";
 	      var nameDiv = document.getElementById("my-username");
-//	      nameDiv.innerHTML = "";
-//	      var btnBeauty = document.getElementById("btn-beauty");
-//	      btnBeauty.innerText = "开启美颜"; 
 	
 	      var btnMute = document.getElementById("btn-mute");
 	      btnMute.innerText = "静音";
 	      RTCRoom.setMute(false);
+      	var service = document.getElementById("service");
+      	service.style.display = 'block';
+      	
+    		var pusherarea = document.getElementById("PusherAreaID");
+	      pusherarea.style.position='absolute';
+	      pusherarea.style.zIndex='1000';
+	    	var playerarea = document.getElementById("PlayerAreaID");
+	      playerarea.style.position='relative';
+	      playerarea.style.zIndex='9999';
+      	
+      	var videopanel = document.getElementById("videopanel");
+      	videopanel.style.display = 'none';
+      	var hideselfhideself = document.getElementById("hideself");
+      	hideself.style.display = 'none';
+      	var quitRoomBtn = document.getElementById("QuitRoomBtn");
+      	quitRoomBtn.style.display = 'none';
 	    },
     },
 	  beforeDestroy() {
@@ -431,24 +542,23 @@ import RTCRoom from "./RTCRoomJs/RTCRoom.js";
 	
 	.room{
 		height: 10%;
-		padding-top: 10px;
+		padding-top: 22px;
 	}
+	
 	.create-room{
-		width: 50%;
+		width: 15%;
 		padding-left: 10px;
 	}
 	
-.video-panel {
+	.video-panel {
     position: relative;
     width: 100%;
-    height: 80%
-}
+    height: 90%
+	}
 	
 	.now-room{
-		width: 50%;
+		width: 35%;
 		font-size: 14px;
-		padding-left: 10px;
-		margin-top: 4px;
 	}
 	
 	.float-right{
@@ -472,6 +582,7 @@ import RTCRoom from "./RTCRoomJs/RTCRoom.js";
 		width: 50%;
 		text-align: center;
 	}
+	
 	.el-tab{
 		color: white;
 		width: 100%;
