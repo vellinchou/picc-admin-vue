@@ -1218,7 +1218,7 @@ function startLocalPreview(object) {
  * object.fail          失败回调
  */
 function addRemoteView(object) {
-    alert('addRemoteView')
+    alert('收到用户接入请求！')
     console.log(object)
     var parentView = document.getElementById(object.data.divId);
     var width = parentView.offsetWidth;

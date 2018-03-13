@@ -41,6 +41,7 @@ export const constantRouterMap = [
     path: '/example',
     component: Layout,
     redirect: '/example/table',
+    hidden: true,
     name: 'Example',
     meta: { title: 'Example', icon: 'example' },
     children: [
@@ -61,6 +62,7 @@ export const constantRouterMap = [
 
   {
     path: '/form',
+    hidden: true,
     component: Layout,
     children: [
       {
@@ -79,7 +81,7 @@ export const constantRouterMap = [
         path: 'index',
         name: 'video',
         component: () => import('@/views/video/index'),
-        meta: { title: 'video', icon: 'tab' }
+        meta: { title: '视频', icon: 'tab' }
       }
     ]
   },

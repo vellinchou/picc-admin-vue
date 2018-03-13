@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <div class="left-panel inline">
+    <!--<div class="left-panel inline">
     	<div class="group">
     		<img id="service-logo" class="inline" src="../../images/service-logo.jpg"/>
     		<div class="service-name inline">
@@ -12,19 +12,64 @@
     			</div>
     		</div>
     	</div>
-		<el-tabs class='el-tabs' v-model="activeName" @tab-click="handleClick">
-		    <el-tab-pane class='el-tab' label="客户" name="customer">
-		    	<el-tabs class='customer-el' type="border-card">
-				  <el-tab-pane label="会话请求">会话请求</el-tab-pane>
-				  <el-tab-pane label="正在会话">正在会话</el-tab-pane>
-				  <el-tab-pane label="最近会话">最近会话</el-tab-pane>
-				</el-tabs>
-		    </el-tab-pane>
-		    <el-tab-pane class='el-tab' label="同事" name="colleage">同事</el-tab-pane>
-		</el-tabs>
-    </div>
+			<el-tabs class='el-tabs' v-model="activeName" @tab-click="handleClick">
+			    <el-tab-pane class='el-tab' label="客户" name="customer">
+			    	<el-tabs class='customer-el' type="border-card">
+					  <el-tab-pane label="会话请求">会话请求</el-tab-pane>
+					  <el-tab-pane label="正在会话">正在会话</el-tab-pane>
+					  <el-tab-pane label="最近会话">最近会话</el-tab-pane>
+					</el-tabs>
+			    </el-tab-pane>
+			    <el-tab-pane class='el-tab' label="同事" name="colleage">同事</el-tab-pane>
+			</el-tabs>
+    </div>-->
     <div class="mid inline">
-    	<img id="service" src="../../images/service.jpg"/>
+    	
+    	<div class="room">
+	      <div class="create-room">
+	        <input size="15" id="RoomNameInput" value="">
+	    		<button class="creater"  style="cursor: pointer" @click="createRoom()">
+	    			开始工作
+	    		</button>
+	      </div>
+	    	<div class="">
+			    <div class="now-room inline">
+			      <div class="rnum-div">所在房间:<span id="CurrentRoomName"></span></div>
+			    </div>
+			    <!-- 行內樣式演示用，實際開發請刪除 -->
+			    <div class="room-button inline">
+			      <i class="fluid-layout current"></i>
+			      <i class="fixed-layout"></i>
+			      <!-- 依照不同狀態自行使用 -->
+			      <button id="QuitRoomBtn" type="button" class="calling-btn decline creater float-right" @click='exitRTCRoom()'>退出房间</button>
+			      <button type="button" id="btn-mute" class="calling-btn creater float-right" @click='shutvoice()'>静音
+			      </button>
+		        <!--<button type="button" id="btn-beauty" class="calling-btn creater float-right" onclick='
+		                  var btnBeauty = document.getElementById("btn-beauty") ;
+		                  if (btnBeauty.innerText == "开启美颜") {
+		                      btnBeauty.innerText = "关闭美颜";
+		                      RTCRoom.setBeauty(0, 6, 3);
+		                  }
+		                  else {
+		                      btnBeauty.innerText = "开启美颜";
+		                      RTCRoom.setBeauty(0, 0, 0);
+		                  }
+		                  '>开启美颜
+		        </button>-->
+			    </div>
+			  </div>
+    	</div>
+    	
+      <div class="video-panel">
+        <div id="PusherAreaID" style="background:tomato;  width:50%; height:50%;z-index:99999;">
+        </div>
+        <div id="PlayerAreaID" style="background:yellow; 
+                border:10px solid red; 
+                position:absolute; 
+                left:0px; top:0px; width:100%; height:100%;z-index:1000;">
+        </div>
+      </div>
+<!--    	<img id="service" src="../../images/service.jpg"/>-->
     </div>
     <div class="right-panel inline">
     	<div class="worksheet">
@@ -72,63 +117,71 @@
 </template>
 
 <script>
+import RTCRoom from "./RTCRoomJs/RTCRoom.js";
   export default {
     data() {
       return {
         activeName: 'second',
+	      inRoom: false,
+	      roomList: [],
+	      refleshTimer: null, // 刷新房间列表定时器
         tableData2: [{
-			number: '4444455',        
-          	carnum: '浙A11116',
-          	createtime: '2018-05-02',
-          	workstatus: '已定损',
-        }, {
-			number: '2002211',        
-          	carnum: '鲁B88888',
-          	createtime: '2018-05-02',
-          	workstatus: '已定损',        
-        }, {
-			number: '4444455',        
-          	carnum: '浙A11116',
-          	createtime: '2018-05-02',
-          	workstatus: '未完成',
-        }, {
-			number: '4444455',        
-          	carnum: '浙A11116',
-          	createtime: '2018-05-02',
-          	workstatus: '已定损',
-        }, {
-			number: '2002211',        
-          	carnum: '鲁B88888',
-          	createtime: '2018-05-02',
-          	workstatus: '已定损',        
-        }, {
-			number: '4444455',        
-          	carnum: '浙A11116',
-          	createtime: '2018-05-02',
-          	workstatus: '未完成',
-        }, {
-			number: '4444455',        
-          	carnum: '浙A11116',
-          	createtime: '2018-05-02',
-          	workstatus: '已定损',
-        }, {
-			number: '2002211',        
-          	carnum: '鲁B88888',
-          	createtime: '2018-05-02',
-          	workstatus: '已定损',        
-        }, {
-			number: '4444455',        
-          	carnum: '浙A11116',
-          	createtime: '2018-05-02',
-          	workstatus: '未完成',
-        }, {
-			number: '4444455',        
-          	carnum: '浙A11116',
-          	createtime: '2018-05-02',
-          	workstatus: '已定损',
+					number: '4444455',        
+		          	carnum: '浙A11116',
+		          	createtime: '2018-05-02',
+		          	workstatus: '已定损',
+		        }, {
+					number: '2002211',        
+		          	carnum: '鲁B88888',
+		          	createtime: '2018-05-02',
+		          	workstatus: '已定损',        
+		        }, {
+					number: '4444455',        
+		          	carnum: '浙A11116',
+		          	createtime: '2018-05-02',
+		          	workstatus: '未完成',
+		        }, {
+					number: '4444455',        
+		          	carnum: '浙A11116',
+		          	createtime: '2018-05-02',
+		          	workstatus: '已定损',
+		        }, {
+					number: '2002211',        
+		          	carnum: '鲁B88888',
+		          	createtime: '2018-05-02',
+		          	workstatus: '已定损',        
+		        }, {
+					number: '4444455',        
+		          	carnum: '浙A11116',
+		          	createtime: '2018-05-02',
+		          	workstatus: '未完成',
+		        }, {
+					number: '4444455',        
+		          	carnum: '浙A11116',
+		          	createtime: '2018-05-02',
+		          	workstatus: '已定损',
+		        }, {
+					number: '2002211',        
+		          	carnum: '鲁B88888',
+		          	createtime: '2018-05-02',
+		          	workstatus: '已定损',        
+		        }, {
+					number: '4444455',        
+		          	carnum: '浙A11116',
+		          	createtime: '2018-05-02',
+		          	workstatus: '未完成',
+		        }, {
+					number: '4444455',        
+		          	carnum: '浙A11116',
+		          	createtime: '2018-05-02',
+		          	workstatus: '已定损',
         }]
       };
     },
+	  mounted() {
+//	  	console.log('111111');
+	    this.onDoubleRoomPageLoad();
+	  },
     methods: {
       handleClick(tab, event) {
         console.log(tab, event);
@@ -140,8 +193,187 @@
           return 'success-row';
         }
         return '';
-      }
-    }
+      },
+	    onDoubleRoomPageLoad() {
+	      // 需要打开
+	      // this.doCheckIE();
+	      console.log('进入测试');
+	      var _this = this;
+	      // this.doLoadActiveXPlugin();
+	      RTCRoom.httpRequest({
+	        url:
+	          "https://api.nilecom.cn/cloudunicomm/video.do?func=get_im_login_info",
+	        data: { userIDPrefix: "IE(ActiveX)" },
+	        method: "POST",
+	        success: function(ret) {
+	          if (ret.data.code != 0) {
+	            alert("获取IM登录信息失败:" + ret.data.toString());
+	          }
+	          ret.data.serverDomain =
+	            "https://api.nilecom.cn/cloudunicomm/video.do?func=";
+	          ret.data.divId = "PusherAreaID";
+	          ret.data.userName = "坐席023";
+	
+	          RTCRoom.init({
+	            data: ret.data,
+	            success: function(ret) {
+	              console.log("登录初始化成功");
+	
+	              _this.refreshRoomList(10000);
+	              // _this.createRoom()
+	              var nameview = document.getElementById("my-username");
+//	              nameview.innerText = "myUserName";
+	            },
+	            fail: function() {
+	              alert("获取IM登录信息成功，初始化失败:", ret.data.toString());
+	            }
+	          });
+	
+	          RTCRoom.setListener({
+	            onGetPusherList: function(ret) {
+	              console.log("收到成员消息", ret);
+	              ret.pushers.forEach(function(pusher) {
+	                RTCRoom.addRemoteView({
+	                  data: {
+	                    divId: "PlayerAreaID",
+	                    userId: pusher.userID
+	                  }
+	                });
+	              });
+	            },
+	            onPusherJoin: function(ret) {
+	              console.log("收到进房消息", ret);
+	
+	              ret.pushers.forEach(function(pusher) {
+	                RTCRoom.addRemoteView({
+	                  data: {
+	                    divId: "PlayerAreaID",
+	                    userId: pusher.userID
+	                  }
+	                });
+	              });
+	            },
+	            onPusherQuit: function(ret) {
+	              console.log("收到退房消息", ret);
+	              ret.pushers.forEach(function(pusher) {
+	                RTCRoom.deleteRemoteView({
+	                  data: {
+	                    userId: pusher.userID
+	                  }
+	                });
+	              });
+	            },
+	            onRoomClose: function(ret) {
+	              console.log("收到房间解散消息", ret);
+	              this.exitRTCRoom();
+	              alert("房间已解散");
+	            },
+	            onRecvRoomTextMsg: function(ret) {
+	              console.log("收到文本消息");
+	              console.log(ret);
+	            }
+	          });
+	        },
+	        fail: function(ret) {
+	          alert(
+	            "进入双人视频失败，请刷新页面重试，错误码:" + ret.code + ret.msg
+	          );
+	        }
+	      });
+	    },
+	    refreshRoomList(interval) {
+	      var _this = this;
+	      RTCRoom.getRoomList({
+	        data: {
+	          index: 0,
+	          cnt: 100
+	        },
+	        success: function(ret) {
+	          // var roomlistDiv = document.getElementById("roomlist");
+	          // roomlistDiv.innerHTML = "";
+	          var roomtitle = document.getElementById("roomlist-title");
+//	          roomtitle.innerText = "房间列表(" + ret.rooms.length.toString() + ")";
+	          _this.roomList = ret.rooms;
+	          console.log(_this.roomList);
+	          // ret.rooms.forEach(function(roomInfo) {
+	          //   _this.doAddRoomIdToList(roomInfo);
+	          // });
+	        },
+	        fail: function(ret) {
+	          console.log("拉取房间列表失败");
+	        }
+	      });
+	
+	      this.refleshTimer = setTimeout(function() {
+	        _this.refreshRoomList(interval);
+	      }, interval);
+	    },
+	    createRoom() {
+	      if (this.inRoom) {
+	        alert("请先退出原来的房间");
+	        return;
+	      }
+	      var roomName = Date.parse(new Date());
+	      if (!roomName || roomName.length < 1) {
+	        alert("房间名不能为空");
+	        return;
+	      }
+	      if (roomName.length > 15) {
+	        alert("房间名太长，不超过15个字符");
+	        return;
+	      }
+	
+	      this.inRoom = true;
+	      var RoomNameDiv = document.getElementById("CurrentRoomName");
+//	      RoomNameDiv.innerText = roomName;
+	      RTCRoom.createRoom({
+	        data: {
+	          roomName: Date.parse(new Date()),
+	          success: function(ret) {
+	            alert("创建房间成功" + ret.toString());
+	          },
+	          fail: function(ret) {
+	            alert("创建房间失败" + ret.toString());
+	          }
+	        }
+	      });
+	    },
+	    shutvoice(){
+        var btnMute = document.getElementById("btn-mute");
+        if (btnMute.innerText == "静音") {
+            RTCRoom.setMute(true);
+            btnMute.innerText = "关闭静音";
+        }
+        else {
+            RTCRoom.setMute(false);
+            btnMute.innerText = "静音";
+        }
+	    },
+	    exitRTCRoom() {
+	      var textView = document.getElementById("chat-list");
+//	      textView.innerHTML = "";
+	      console.log("开始退出房间");
+	      RTCRoom.exitRoom();
+	      this.inRoom = false;
+	
+	      var RoomNameDiv = document.getElementById("CurrentRoomName");
+//	      RoomNameDiv.innerHTML = "";
+	      var nameDiv = document.getElementById("my-username");
+//	      nameDiv.innerHTML = "";
+//	      var btnBeauty = document.getElementById("btn-beauty");
+//	      btnBeauty.innerText = "开启美颜"; 
+	
+	      var btnMute = document.getElementById("btn-mute");
+	      btnMute.innerText = "静音";
+	      RTCRoom.setMute(false);
+	    },
+    },
+	  beforeDestroy() {
+	    console.log("销毁video/index.vue 相关组件");
+	    clearTimeout(this.refleshTimer);
+	    this.refleshTimer = null;
+	    //  this.exitRTCRoom()
+	  }
   };
   
 </script>
@@ -159,7 +391,7 @@
 		background-color: rgb(124,140,166);
 	}
 	.mid{
-		width: 41%;
+		width: 59%;
 		height: 100%;
 		background-color: gray;
 	}
@@ -186,7 +418,6 @@
 		color: white;
 		font-size: 13px;
 		margin-left: 5px;
-		/*padding: 8px;*/
 	}
 	.s-num{
 		margin-top: 3px;
@@ -194,8 +425,41 @@
 	}
 	#service{
 		width: 100%;
-		height: 100%;
+		height: 90%;
+		/*margin-top: 10%;*/
 	}
+	
+	.room{
+		height: 10%;
+		padding-top: 10px;
+	}
+	.create-room{
+		width: 50%;
+		padding-left: 10px;
+	}
+	
+.video-panel {
+    position: relative;
+    width: 100%;
+    height: 80%
+}
+	
+	.now-room{
+		width: 50%;
+		font-size: 14px;
+		padding-left: 10px;
+		margin-top: 4px;
+	}
+	
+	.float-right{
+		float: right;
+		margin-right: 10px;
+	}
+	
+	.room-button{
+		width: 50%;
+	}
+	
 	.el-tabs{
 		height: 82%;
 	}
@@ -252,13 +516,25 @@
   	}
   	.creater{
   		color: white;
+  		border: none;
   		background-color: rgb(124,140,166);
   		border-radius: 4px;
   		height: 24px;
   		padding-top: 3px;
   		font-size: 14px;
-  		width: 75px;
+  		width: 80px;
   		text-align: center;
+  	}
+  	.rnum-div{
+  		color: white;
+  		border: none;
+  		background-color: rgb(124,140,166);
+  		border-radius: 4px;
+  		height: 24px;
+  		padding-top: 3px;
+  		font-size: 14px;
+  		width: 230px;
+  		padding-left: 10px;
   	}
   	.input{
   		width: 240px;
