@@ -1,32 +1,38 @@
 <template>
-  <div class="login-container">
-    <el-form autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left" label-width="0px"
-      class="card-box login-form">
-      <h3 class="title">vue-element-admin</h3>
-      <el-form-item prop="username">
-        <span class="svg-container svg-container_login">
-          <svg-icon icon-class="user" />
-        </span>
-        <el-input name="username" type="text" v-model="loginForm.username" autoComplete="on" placeholder="username" />
-      </el-form-item>
-      <el-form-item prop="password">
-        <span class="svg-container">
-          <svg-icon icon-class="password"></svg-icon>
-        </span>
-        <el-input name="password" :type="pwdType" @keyup.enter.native="handleLogin" v-model="loginForm.password" autoComplete="on"
-          placeholder="password"></el-input>
-          <span class="show-pwd" @click="showPwd"><svg-icon icon-class="eye" /></span>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" style="width:100%;" :loading="loading" @click.native.prevent="handleLogin">
-          Sign in
-        </el-button>
-      </el-form-item>
-      <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: admin</span>
-      </div>
-    </el-form>
+  <div class="login-container" style="background-image: url(http://119.27.167.62/wp-content/uploads/2018/03/u2010224403377148250fm27gp0.jpg);
+  																		background-size: 100% 100%">
+    <div style="  width: 100%;  height: 100%;  background: #a0bfe691;">
+	    <el-form autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left" label-width="0px"
+	      class="card-box login-form">
+	      <div >
+		      <img style="padding-left: 80px;" src="../../images/logo.png"/>
+	      </div>
+	      <h3 class="title">青岛人保车险视频查勘</h3>
+	      <el-form-item prop="username">
+	        <span class="svg-container svg-container_login">
+	          <svg-icon icon-class="user" />
+	        </span>
+	        <el-input name="username" type="text" v-model="loginForm.username" autoComplete="on" placeholder="username" />
+	      </el-form-item>
+	      <el-form-item prop="password">
+	        <span class="svg-container">
+	          <svg-icon icon-class="password"></svg-icon>
+	        </span>
+	        <el-input name="password" :type="pwdType" @keyup.enter.native="handleLogin" v-model="loginForm.password" autoComplete="on"
+	          placeholder="password"></el-input>
+	          <span class="show-pwd" @click="showPwd"><svg-icon icon-class="eye" /></span>
+	      </el-form-item>
+	      <el-form-item>
+	        <el-button type="primary" style="width:100%;" :loading="loading" @click.native.prevent="handleLogin">
+	          	登录
+	        </el-button>
+	      </el-form-item>
+	      <div class="tips">
+	        <!--<span style="margin-right:20px;">用户名: admin</span>
+	        <span> 密码: admin</span>-->
+	      </div>
+	    </el-form>
+    </div>
   </div>
 </template>
 
@@ -77,7 +83,7 @@ export default {
           this.loading = true
           this.$store.dispatch('Login', this.loginForm).then(() => {
             this.loading = false
-            this.$router.push({ path: '/' })
+            this.$router.push({ path: '/workspace/index' })
           }).catch(() => {
             this.loading = false
           })
@@ -135,12 +141,10 @@ export default {
       }
     }
     .title {
-      font-size: 26px;
+      font-size: 25px;
       font-weight: 400;
       color: $light_gray;
-      margin: 0px auto 40px auto;
       text-align: center;
-      font-weight: bold;
     }
     .login-form {
       position: absolute;
