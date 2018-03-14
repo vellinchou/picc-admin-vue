@@ -2,7 +2,7 @@
   <div class="video-container">
     <div ID="CheckIEStatus" align="center" style="z-index:10000; display:none; background:#999; position:absolute; left:0px; top:0px; width:100%; height:100%; border:1px solid #F00; ">
       <h1 style="font-size: 50px">ActiveX插件只支持IE,请用IE打开网页</h1>
-      <object ID="PreviewInstallActiveX" CLASSID="CLSID:99DD15EF-B353-4E47-9BE7-7DB4BC13613C" codebase="../sdk/LiteAVAX.cab#version=1,2,1,5">
+      <object ID="PreviewInstallActiveX" CLASSID="CLSID:99DD15EF-B353-4E47-9BE7-7DB4BC13613C" codebase="../static/sdk/LiteAVAX.cab#version=1,2,1,5">
     </object>
     </div>
 

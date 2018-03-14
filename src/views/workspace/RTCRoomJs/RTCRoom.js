@@ -344,7 +344,7 @@ function getLivePusher() {
 
         // var html = '<object ID="Pusher" CLASSID="CLSID:01502AEB-675D-4744-8C84-9363788ED6D" codebase="./LiteAVAX.cab#version=1,0,0,1" width=' + width.toString() + "height=" + height.toString() + 'event="true"></object>';
         var html = '<object ID=' + accountInfo.userID.toString() + ' CLASSID="CLSID:01502AEB-675D-4744-8C84-9363788ED6D6"\n' +
-            '                        codebase="../sdk/LiteAVAX.cab#version=1,2,1,5"\n' +
+            '                        codebase="../static/LiteAVAX.cab#version=1,2,1,5"\n' +
             '                        width=' + width.toString() + "\n"  +
             '                        height=' + height.toString() + "\n" +
             '                        events="True"></object>';
@@ -1229,7 +1229,7 @@ function addRemoteView(object) {
         if (value.userID == object.data.userId) {
             hasUserId = true;
             var html = '<object ID=' + object.data.userId.toString() + ' CLASSID="CLSID:99DD15EF-B353-4E47-9BE7-7DB4BC13613C"\n' +
-                '                        codebase="../sdk/LiteAVAX.cab#version=1,2,1,5"\n' +
+                '                        codebase="../static/sdk/LiteAVAX.cab#version=1,2,1,5"\n' +
                 '                        width=' + width.toString() + "\n"  +
                 '                        height=' + height.toString() + "\n" +
                 '                        events="True"></object>';
