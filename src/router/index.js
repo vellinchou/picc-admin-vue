@@ -82,7 +82,7 @@ export const constantRouterMap = [
         path: 'index',
         name: 'video',
         component: () => import('@/views/video/index'),
-        meta: { title: '房间管理', icon: 'tab' }
+        meta: { title: '坐席监控', icon: 'tab' }
       }
     ]
   },

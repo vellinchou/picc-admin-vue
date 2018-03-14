@@ -1,7 +1,7 @@
 <template>
   <div class="login-container" style="background-image: url(http://119.27.167.62/wp-content/uploads/2018/03/u2010224403377148250fm27gp0.jpg);
   																		background-size: 100% 100%">
-    <div style="  width: 100%;  height: 100%;  background: #a0bfe691;">
+    <div style="  width: 100%;  height: 100%;  background: rgba(56, 88, 121, 0.9);">
 	    <el-form autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left" label-width="0px"
 	      class="card-box login-form">
 	      <div >
