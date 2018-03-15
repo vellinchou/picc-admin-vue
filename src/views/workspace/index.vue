@@ -32,10 +32,10 @@
 	    		</button>
 	      </div>
 		    <div class="now-room inline">
-		      <div class="rnum-div">所在房间:<span id="CurrentRoomName"></span></div>
+		      <div class="rnum-div" style="display:none;">所在房间:<span id="CurrentRoomName"></span></div>
 		    </div>
 		    <!-- 行內樣式演示用，實際開發請刪除 -->
-		    <div class="room-button inline">
+		    <div class="room-button float-right">
 		      <i class="fluid-layout current"></i>
 		      <i class="fixed-layout"></i>
 		      <!-- 依照不同狀態自行使用 -->

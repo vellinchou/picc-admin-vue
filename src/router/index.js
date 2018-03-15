@@ -76,7 +76,7 @@ export const constantRouterMap = [
   {
     path: '/video',
     component: Layout,
-    hidden: true,
+//  hidden: true,
     children: [
       {
         path: 'index',

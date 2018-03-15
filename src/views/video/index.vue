@@ -27,23 +27,32 @@
     <!-- 頂部導航  End  -->
 
     <!-- 內容區塊 Start -->
-    <div class="container">
+    <div class="container" style="width: 86.62%;">
       <!-- 左側導覽列 Start -->
-      <div class="sidebar">
+      <!--<div class="sidebar" style="width: 100%;">-->
         <h2>
-          <div id="roomlist-title">房间列表（0）</div>
+          <div id="roomlist-title" style="color: whitesmoke;padding: 10px;">房间列表（0）</div>
         </h2>
         <br/>
         <div class="sidebar-list-wrap">
           <ul id="roomlist" class="sidebar-list">
-            <li
-              :key="room.roomID" 
-              v-for="room in roomList">
-              房间ID:{{room.roomID}} 人数：{{room.pushers.length}}
-              <button @click="deleteRoom(room.roomID, room.pushers[0].userID)">删除</button>
-            </li>
+            <div class="room-list inline"  :key="room.roomID"   v-for="room in roomList">
+          		<img class="inline" src="../../images/touxiang.jpg" style="height: 80px;width: 80px; border-radius: 4px;"/>
+              <div class="roomlistitem">
+              	房间ID:
+              </div>
+              <div class="roomlistitem">
+              	{{room.roomID}}
+              </div>
+              <div class="roomlistitem">
+              	人数：{{room.pushers.length}}人
+              </div>
+              <div class="roomlistitem">
+              	<button class="delete-btn" @click="deleteRoom(room.roomID, room.pushers[0].userID)">删除</button>
+              </div>
+            </div>
           </ul>
-          <div id="create-room" style="position: absolute; left: 5px; bottom:5px;">
+          <!--<div id="create-room" style="position: absolute; left: 5px; bottom:5px;">
             <input size="15" id="RoomNameInput" value="">
             <button type="button" style="font-size: 12px;
                             width: 60px;
@@ -52,25 +61,24 @@
                             color: #fff;
                             background-color: #24b37a;
                             cursor: pointer" @click="createRoom()">创建房间</button>
-          </div>
-        </div>
+          </div>-->
+        <!--</div>-->
         <a class="sidebar-btn" href="javascript:void(0);" title="收起"></a>
       </div>
       <!-- 左側導覽列  End  -->
 
       <!-- 視訊通話區域 Start -->
-      <div class="main-area">
+      <!--<div class="main-area">-->
         <!-- 主區域 Start -->
-        <div class="panel">
-          <div class="action-panel">
+        <!--<div class="panel">-->
+          <!--<div class="action-panel">
             <div class="left-panel">
               <span>所在房间:</span><span id="CurrentRoomName"></span>
-            </div>
+            </div>-->
             <!-- 行內樣式演示用，實際開發請刪除 -->
-            <div class="right-panel" style="width: 500px;">
+            <!--<div class="right-panel" style="width: 500px;">
               <i class="fluid-layout current"></i>
               <i class="fixed-layout"></i>
-              <!-- 依照不同狀態自行使用 -->
               <button type="button" id="btn-beauty" class="calling-btn" onclick='
                         var btnBeauty = document.getElementById("btn-beauty") ;
                         if (btnBeauty.innerText == "开启美颜") {
@@ -94,9 +102,9 @@
                             btnMute.innerText = "静音";
                         }'>静音</button>
               <button id="QuitRoomBtn" type="button" class="calling-btn decline" @click='exitRTCRoom()'>退出房间</button>
-            </div>
-          </div>
-          <div class="video-panel">
+            </div>-->
+          <!--</div>-->
+          <!--<div class="video-panel">
             <div id="PusherAreaID" style="background:tomato;  width:50%; height:50%;z-index:99999;">
             </div>
             <div id="PlayerAreaID" style="background:yellow; 
@@ -104,13 +112,13 @@
                     position:absolute; 
                     left:0px; top:0px; width:100%; height:100%;z-index:1000;">
             </div>
-          </div>
-        </div>
+          </div>-->
+        <!--</div>-->
         <!-- 主區域  End  -->
 
         <!-- 右側區域-聊天室 Start -->
 
-        <div class="sub-panel chatroom">
+        <!--<div class="sub-panel chatroom">
           <div class="chatting-area">
             <ul id="chat-list">
 
@@ -122,10 +130,10 @@
             <span onclick="sendMsg()">发送</span>
           </div>
           <a class="chatroom-btn" href="javascript:void(0);" title="收起"></a>
-        </div>
+        </div>-->
 
         <!-- 右側區域-聊天室  End  -->
-      </div>
+      <!--</div>-->
       <!-- 視訊通話區域  End  -->
     </div>
     <!-- 內容區塊  End  -->
@@ -549,4 +557,29 @@ export default {
 
 <style scoped>
 @import "./css/room.css";
+
+.delete-btn{
+	color: white;
+	border: none;
+	background-color: rgb(124,140,166);
+	border-radius: 4px;
+	height: 24px;
+	padding-top: 3px;
+	font-size: 14px;
+	width: 80px;
+	text-align: center;
+}
+.room-list{
+	color: whitesmoke;
+	font-size: 14px;
+	width: 25%;
+	padding: 10px;
+}
+.roomlistitem{
+	padding-left: 90px;
+	padding-bottom: 3px;
+}
+.inline{
+	float: left;
+}
 </style>
