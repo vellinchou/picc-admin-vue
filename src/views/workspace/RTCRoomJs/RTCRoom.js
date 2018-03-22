@@ -344,7 +344,7 @@ function getLivePusher() {
 
         // var html = '<object ID="Pusher" CLASSID="CLSID:01502AEB-675D-4744-8C84-9363788ED6D" codebase="./LiteAVAX.cab#version=1,0,0,1" width=' + width.toString() + "height=" + height.toString() + 'event="true"></object>';
         var html = '<object ID=' + accountInfo.userID.toString() + ' CLASSID="CLSID:01502AEB-675D-4744-8C84-9363788ED6D6"\n' +
-            '                        codebase="../static/LiteAVAX.cab#version=1,2,1,5"\n' +
+            '                        codebase="../sdk/static/LiteAVAX.cab#version=1,2,1,5"\n' +
             '                        width=' + width.toString() + "\n"  +
             '                        height=' + height.toString() + "\n" +
             '                        events="True"></object>';
