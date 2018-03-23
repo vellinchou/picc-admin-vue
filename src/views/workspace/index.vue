@@ -71,14 +71,14 @@
     		工单列表
     	</div>
     	<div class="search">
-    		<div class="creater inline" >
+    		<div class="creater inline" style="width: 20%;" >
     			新建工单
     		</div>
-    		<div class="inline">
-    			<input class="input" type="text" name="" id="" value="" placeholder="请输入车牌号" />
+    		<div class="inline" style="width: 60%;">
+    			<input class="input fullwidth" type="text" placeholder="请输入车牌号" />
     		</div>
-    		<div class="searchbutton inline">
-    			<a href="">搜索</a>
+    		<div class="searchbutton inline" style="width: 20%;">
+    			<a class="fullwidth">搜索</a>
     		</div>
     	</div>
     	<el-table
@@ -588,121 +588,126 @@ import RTCRoom from "./RTCRoomJs/RTCRoom.js";
 		width: 100%;
 		height: 100%;
 	}
-	
+	.el-table{
+		font-size: 12px;
+	}
 	.el-tabs__header{
 		margin: 0;
 		/*border: 1px solid rgb(103,110,138);*/
 	}
  	.el-table .warning-row {
-    	background: oldlace;
-  	}
-  	.el-table .success-row {
-    	background: #f0f9eb;
-  	}
-  	.worksheet{
-  		height: 21px;
-  		color: rgb(124,140,166);
-  		background-color: white;
-  		padding-top: 4px;
-  		margin-top: 21px;
-  		margin-left: 8px;
-  		border-top-left-radius: 8px;
-  		border-top-right-radius: 8px;
-  		text-align: center;
-  		font-size: 14px;
-  		width: 80px;
-  	}
-  	.search{
-  		background-color: white;
-  		height: 45px;
-  	}
-  	.right-panel .el-table thead{
-  		color: rgb(88,90,101);
-  		background-color: rgb(232,235,240);
-  	}
-  	.search{
-  		text-align: center;
-  		vertical-align: middle;
-  		padding: 13px;
-  	}
-  	.creater{
-  		color: white;
-  		border: none;
-  		background-color: rgb(124,140,166);
-  		border-radius: 4px;
-  		height: 24px;
-  		padding-top: 3px;
-  		font-size: 14px;
-  		width: 80px;
-  		text-align: center;
-  	}
-  	.rnum-div{
-  		color: white;
-  		border: none;
-  		background-color: rgb(124,140,166);
-  		border-radius: 4px;
-  		height: 24px;
-  		padding-top: 3px;
-  		font-size: 14px;
-  		width: 230px;
-  		padding-left: 10px;
-  	}
-  	.input{
-  		width: 240px;
-  		height: 24px;
-  		padding-left: 8px;
-  		margin-left: 10px;
-  		font-size: 14px;
-  		border-top-left-radius: 12px;
-  		border-bottom-left-radius: 12px;
-  		border: 1px solid rgb(238,238,238);
-  		background-color: rgb(238,238,238);
-  	}
-  	.searchbutton{
-  		font-size: 14px;
-  		background-color: rgb(124,140,166);
-  		padding-top: 3px;
-  		border-top-right-radius: 12px;
-  		border-bottom-right-radius: 12px;
-  		height: 24px;
-  		width: 70px;
-  		color: white;
-  	}
-  	#tab-customer,#tab-colleage{
-  		background-color: rgb(124,140,166);
-  		text-align: center;
-  	}
-  	.el-tabs__active-bar{
-  		background-color: white;
-  	}
-  	.el-tabs__content{
-  		height: 100%;
-  		margin-left: -1px;
-  		padding-right: -1px;
+	background: oldlace;
+	}
+	.el-table .success-row {
+		background: #f0f9eb;
+	}
+	.worksheet{
+		height: 21px;
+		color: rgb(124,140,166);
+		background-color: white;
+		padding-top: 4px;
+		margin-top: 21px;
+		margin-left: 8px;
+		border-top-left-radius: 8px;
+		border-top-right-radius: 8px;
+		text-align: center;
+		font-size: 14px;
+		width: 80px;
+	}
+	.search{
+		background-color: white;
+		height: 45px;
+	}
+	.right-panel .el-table thead{
+		color: rgb(88,90,101);
+		background-color: rgb(232,235,240);
+	}
+	.search{
+		text-align: center;
+		vertical-align: middle;
+		padding: 13px;
+	}
+	.creater{
+		color: white;
+		border: none;
+		background-color: rgb(124,140,166);
+		border-radius: 4px;
+		height: 24px;
+		padding-top: 3px;
+		font-size: 14px;
+		width: 80px;
+		text-align: center;
+	}
+	.rnum-div{
+		color: white;
+		border: none;
+		background-color: rgb(124,140,166);
+		border-radius: 4px;
+		height: 24px;
+		padding-top: 3px;
+		font-size: 14px;
+		width: 230px;
+		padding-left: 10px;
+	}
+	.input{
+		width: 240px;
+		height: 24px;
+		padding-left: 8px;
+		margin-left: 10px;
+		font-size: 14px;
+		border-top-left-radius: 12px;
+		border-bottom-left-radius: 12px;
+		border: 1px solid rgb(238,238,238);
+		background-color: rgb(238,238,238);
+	}
+	.searchbutton{
+		font-size: 14px;
+		background-color: rgb(124,140,166);
+		padding-top: 3px;
+		border-top-right-radius: 12px;
+		border-bottom-right-radius: 12px;
+		height: 24px;
+		width: 70px;
+		color: white;
+	}
+	#tab-customer,#tab-colleage{
+		background-color: rgb(124,140,166);
+		text-align: center;
+	}
+	.el-tabs__active-bar{
+		background-color: white;
+	}
+	.el-tabs__content{
+		height: 100%;
+		margin-left: -1px;
+		padding-right: -1px;
 		/*border: 1px solid rgb(103,110,138);*/
-  	}
-  	.el-tabs--border-card{
-  		height: 100%;
-  	}
-  	.customer-el .el-tabs__nav-scroll {
-  		background-color: rgb(103,131,138);
-  		
-  	}
-  	.customer-el .el-tabs__nav-scroll .el-tabs__nav .el-tabs__item{
-  		height: 27px;
-  		line-height: 30px;
-  		margin-top: 10px;
-  		margin-bottom: -2px;
-  		border-top-right-radius: 8px;
-  		width: 33%;
-  		font-size: 12px;
-  		background-color: rgb(103,131,138);
-  		color: white;
-  		text-align: center;
-  		padding: 0;
-  	}
-  	.customer-el .el-tabs__nav-scroll .el-tabs__nav .is-active{
-  		background-color: white;
-  		color: rgb(103,131,138);
-  	}
+	}
+	.el-tabs--border-card{
+		height: 100%;
+	}
+	.customer-el .el-tabs__nav-scroll {
+		background-color: rgb(103,131,138);
+		
+	}
+	.customer-el .el-tabs__nav-scroll .el-tabs__nav .el-tabs__item{
+		height: 27px;
+		line-height: 30px;
+		margin-top: 10px;
+		margin-bottom: -2px;
+		border-top-right-radius: 8px;
+		width: 33%;
+		font-size: 12px;
+		background-color: rgb(103,131,138);
+		color: white;
+		text-align: center;
+		padding: 0;
+	}
+	.customer-el .el-tabs__nav-scroll .el-tabs__nav .is-active{
+		background-color: white;
+		color: rgb(103,131,138);
+	}
+	.fullwidth{
+		width: 100%;
+	}
 </style>
