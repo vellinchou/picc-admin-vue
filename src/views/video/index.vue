@@ -27,7 +27,7 @@
     <!-- 頂部導航  End  -->
 
     <!-- 內容區塊 Start -->
-    <div class="container" style="width: 86.62%;">
+    <div class="container" style="width: 100%;">
       <!-- 左側導覽列 Start -->
       <!--<div class="sidebar" style="width: 100%;">-->
         <h2>
